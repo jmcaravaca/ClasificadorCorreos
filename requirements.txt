@@ -1,0 +1,11 @@
+DateTime==5.0
+extract-msg==0.40.0
+nltk
+numpy
+pandas==1.5.3
+scikit-learn==1.2.2
+#spacy-legacy==3.0.12
+#spacy-loggers==1.0.4
+#spacy==3.5.2
+hupper==1.12
+#waitress==2.1.2
