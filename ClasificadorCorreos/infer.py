@@ -50,17 +50,13 @@ def lemmatizer(string):
 def finalpreprocess(string):
     return lemmatizer(stopword(preprocess(string)))
 
-def infer_from_text(new_text):
-    filename_model =  os.path.join("models",  "clasification_nseg.sav")
-    filename_vectorizer = os.path.join("models", "vectorizer_nseg.sav")
-    lr_tfidf = pickle.load(open(filename_model, 'rb'))
-    tfidf_vectorizer = pickle.load(open(filename_vectorizer, 'rb'))    
+def infer_from_text(new_text, lr_tfidf, tfidf_vectorizer): 
     X_new = tfidf_vectorizer.transform([new_text])
     prediction = lr_tfidf.predict(X_new)
     prediction_prob = lr_tfidf.predict_proba(X_new)
     confidence = dict(zip(lr_tfidf.classes_, prediction_prob[0]))
-    results = {'prediction' : prediction,
-               'confidence' : confidence}
-    print(f"{prediction=} and {confidence=}")
+    results = {'prediction' : prediction[0],
+               'confidence' : confidence[prediction[0]]}
+    print(results)
     return results
     
